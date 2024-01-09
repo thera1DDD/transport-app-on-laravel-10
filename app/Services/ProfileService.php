@@ -52,4 +52,9 @@ class ProfileService extends Controller
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
+
+    public function replyOffer($data)
+    {
+        return tap(Offer::find($data['offers_id']))->update(['status' => $data['status']]);
+    }
 }

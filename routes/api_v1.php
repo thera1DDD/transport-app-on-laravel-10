@@ -25,6 +25,7 @@ Route::group(['prefix'=>'mainDisplay'],function (){
 Route::group(['prefix'=>'profile',],function (){
     Route::get('/show',[\App\Http\Controllers\API\V1\ProfileController::class,'show']);
     Route::put('/update',[\App\Http\Controllers\API\V1\ProfileController::class,'update']);
+    Route::post('/offer/reply',[\App\Http\Controllers\API\V1\ProfileController::class,'replyOffer']);
 });
 
 Route::group(['prefix'=>'personalRoutes',],function (){

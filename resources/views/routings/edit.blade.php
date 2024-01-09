@@ -10,7 +10,7 @@
                 @include('layouts.errors')
                 <form action="{{ route('routing.update', $routing->id) }}" method="post">
                     @csrf
-                    @method('PUT') {{-- Добавляем метод PUT для обновления данных --}}
+                    @method('PUT')
 
                     <div class="form-group">
                         <label for="route_type">Тип:</label>

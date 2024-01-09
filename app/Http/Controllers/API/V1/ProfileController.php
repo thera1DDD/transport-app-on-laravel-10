@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Profile\ProfileRequest;
+use App\Http\Requests\API\Profile\ReplyOfferRequest;
 use App\Services\ProfileService;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 class ProfileController extends Controller
 {
 
-    protected $profileService;
+    protected ProfileService $profileService;
 
     public function __construct(ProfileService $profileService)
     {
@@ -27,5 +28,11 @@ class ProfileController extends Controller
     {
         $data = $request->validated();
         return $this->profileService->update($data);
+    }
+
+    public function replyOffer(ReplyOfferRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+        return response()->json(['offer'=>$this->profileService->replyOffer($data)]);
     }
 }

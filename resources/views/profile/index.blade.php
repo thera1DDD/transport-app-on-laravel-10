@@ -74,8 +74,16 @@
                         />
                     </div>
 
-                    <!-- Добавьте другие поля для обновления -->
-
+                    <div class="space-y-2">
+                        <label for="phone_number"
+                               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-800">Номер телефона</label>
+                        <input value="{{ auth()->user()->phone_number }}"
+                               class="flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-gray-300"
+                               id="phone_number"
+                               name="phone_number"
+                               placeholder="Введите номер телефона"
+                        />
+                    </div>
                     <div class="flex items-center p-6">
                         <button type="submit"
                                 class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 ml-auto bg-gray-800 text-white">

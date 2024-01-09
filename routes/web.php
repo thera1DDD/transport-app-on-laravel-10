@@ -49,6 +49,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/logout',[\App\Http\Controllers\Admin\ProfileController::class,'destroy'])->name('profile.logout');
     });
 
+    Route::group(['prefix'=>'users',],function (){
+        Route::get('/',[\App\Http\Controllers\Admin\UserController::class,'index'])->name('user.index');
+        Route::delete('{user}',[\App\Http\Controllers\Admin\UserController::class,'destroy'])->name('user.delete');
+        Route::get('/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('user.create');
+        Route::post('/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('user.store');
+        Route::get('/{user}/edit',[\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('user.edit');
+        Route::put('{user}',[\App\Http\Controllers\Admin\UserController::class, 'update'])->name('user.update');
+    });
+
 
 //    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 //    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

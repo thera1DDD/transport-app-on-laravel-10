@@ -32,8 +32,4 @@ class MainDisplayController extends Controller
         $data = $request->validated();
         return $this->routingService->sendOfferToRoute($data);
     }
-    public function replyOffer()
-    {
-
-    }
 }

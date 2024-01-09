@@ -24,7 +24,8 @@ class User extends Authenticatable
         'surname',
         'patronymic',
         'city',
-        'main_image'
+        'main_image',
+        'phone_number'
     ];
 
     /**
