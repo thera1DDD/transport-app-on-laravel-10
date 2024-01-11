@@ -21,7 +21,7 @@ return new class extends Migration
                 ->nullable()
                 ->index()
                 ->constrained('users')->onDelete('cascade');
-            $table->enum('status',['accepted','rejected','waiting'])->default('waiting');
+            $table->enum('status',['accepted','rejected','waiting','completed'])->default('waiting');
             $table->timestamps();
         });
     }

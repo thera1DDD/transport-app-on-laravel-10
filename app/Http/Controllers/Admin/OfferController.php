@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Offer\StoreRequest;
+use App\Http\Requests\Offer\UpdateRequest;
 use App\Http\Requests\Offer\UserRequest;
 use App\Models\Offer;
 use App\Models\Routing;
@@ -48,7 +49,7 @@ class OfferController extends Controller
         return redirect()->route('offer.index')->with('success','Успешно созданно');
     }
 
-    public function update(UserRequest $request, Offer $offer): RedirectResponse
+    public function update(UpdateRequest $request, Offer $offer): RedirectResponse
     {
         $data = $request->validated();
         $this->offerService->update($data,$offer);

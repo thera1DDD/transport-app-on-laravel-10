@@ -10,7 +10,7 @@ class Routing extends Model
     use HasFactory;
     protected $guarded = [];
 
-    protected $fillable = ['*'];
+    protected $fillable = ['name','description','route_type','from_place','to_place','load_type','load_size','status','price','start_time','end_time','owners_id'];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

@@ -38,6 +38,7 @@
                             <option value="accepted" {{ $offer->status == 'accepted' ? 'selected' : '' }}>Принято</option>
                             <option value="waiting" {{ $offer->status == 'waiting' ? 'selected' : '' }}>Ожидает</option>
                             <option value="rejected" {{ $offer->status == 'rejected' ? 'selected' : '' }}>Отклонено</option>
+                            <option value="rejected" {{ $offer->status == 'completed' ? 'selected' : '' }}>Завершено</option>
                         </select>
                     </div>
                     <br>

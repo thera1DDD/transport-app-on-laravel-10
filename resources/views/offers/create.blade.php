@@ -33,6 +33,7 @@
                             <option value="accepted">Принято</option>
                             <option value="waiting">Ожидает</option>
                             <option value="rejected">Отклонено</option>
+                            <option value="completed">Завершено</option>
                         </select>
                     </div>
                     <br>

@@ -47,8 +47,7 @@
                                 <td data-th="Тип груза">{{$route->load_type}}</td>
                                 <td data-th="Размер груза">{{$route->load_size}}</td>
                                 <td data-th="От кого">
-                                    {{ $route->user->name }}
-                                    ({{ $route->user->route_role == 'carrier' ? 'Перевозчик' : 'Отправитель' }})
+                                    {{ $route->user->name ?? 'Удаленный пользователь' }}
                                 </td>
                                 <td data-th="Статус">{{$route->status == 'accepted' ? 'Принято' : 'Ожидает'}}</td>
                                 <td data-th="Действие"> <a href="{{route('routing.edit',$route->id)}}" class="btn btn-outline-success"> <i class="fa fa-edit"></i></a>

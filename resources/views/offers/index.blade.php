@@ -33,7 +33,7 @@
                                 <td data-th="Тип маршрута">{{$offer->route->route_type == 'sender' ? 'Отправлю' : 'Перевезу'}}</td>
                                 <td data-th="Создатель маршрута">{{$offer->route->user->name}}</td>
                                 <td data-th="От кого">{{$offer->requested_user->name}}</td>
-                                <td data-th="Статус">{{ match($offer->status) { 'accepted' => 'Принят', 'rejected' => 'Отклонено', 'waiting' => 'В ожидании', default => 'Неизвестный статус' } }}</td>
+                                <td data-th="Статус">{{ match($offer->status) { 'accepted' => 'Принят', 'rejected' => 'Отклонено', 'waiting' => 'В ожидании','completed' => 'Завершено', default => 'Неизвестный статус' } }}</td>
                                 <td data-th="Действие"> <a href="{{route('offer.edit',$offer->id)}}" class="btn btn-outline-success"> <i class="fa fa-edit"></i></a>
                                     <form action="{{route('offer.delete',$offer->id) }}" method="post">
                                         @csrf
