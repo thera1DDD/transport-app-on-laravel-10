@@ -29,6 +29,7 @@ class UserRequest extends FormRequest
             'city' => 'nullable',
             'main_image' => 'nullable',
             'transport' => 'nullable',
+            'phone_number' => 'nullable',
         ];
     }
 

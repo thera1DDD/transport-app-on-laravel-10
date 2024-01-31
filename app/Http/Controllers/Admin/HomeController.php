@@ -17,7 +17,7 @@ class HomeController extends Controller
         return view('home.index');
     }
 
-    public function routesChart()
+    public function routesChart(): \Illuminate\Http\JsonResponse
     {
         $data = Offer::select(DB::raw("MONTH(created_at) as month"), DB::raw("COUNT(*) as count"))
             ->where('status', 'completed')
