@@ -35,10 +35,10 @@
                     <div class="form-group">
                         <label for="status">Статус:</label>
                         <select name="status" id="status" class="form-control custom-input">
-                            <option value="accepted" {{ $offer->status == 'accepted' ? 'selected' : '' }}>Принято</option>
-                            <option value="waiting" {{ $offer->status == 'waiting' ? 'selected' : '' }}>Ожидает</option>
-                            <option value="rejected" {{ $offer->status == 'rejected' ? 'selected' : '' }}>Отклонено</option>
-                            <option value="completed" {{ $offer->status == 'completed' ? 'selected' : '' }}>Завершено</option>
+                            <option value="accepted" {{ $offer->status == 'accepted' ? 'selected' : '' }}> Принято</option>
+                            <option value="waiting" {{ $offer->status == 'waiting' ? 'selected' : '' }}> Ожидает</option>
+                            <option value="rejected" {{ $offer->status == 'rejected' ? 'selected' : '' }}> Отклонено</option>
+                            <option value="completed" {{ $offer->status == 'completed' ? 'selected' : '' }}> Завершено</option>
                         </select>
                     </div>
                     <br>
