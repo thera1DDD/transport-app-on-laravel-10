@@ -19,8 +19,8 @@ class MainDisplayController extends Controller
         $this->routingService = $routingService;
     }
     public function getRoutes(): JsonResponse {
-        $carrierRoutes = (new Routing)->filterByRouteType('carrier')->get();
-        $senderRoutes = (new Routing)->filterByRouteType('sender')->get();
+        $carrierRoutes = (new Routing)->filterByRouteType('carrier')->paginate(4);
+        $senderRoutes = (new Routing)->filterByRouteType('sender')->paginate(4);
         return response()->json(['carrier'=>$carrierRoutes,'sender'=>$senderRoutes]);
     }
 
