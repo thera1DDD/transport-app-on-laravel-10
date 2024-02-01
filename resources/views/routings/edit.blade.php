@@ -15,8 +15,8 @@
                     <div class="form-group">
                         <label for="route_type">Тип:</label>
                         <select name="route_type" id="route_type" class="form-control custom-input" required>
-                            <option value="carrier" {{ $routing->route_type == 'carrier' ? 'selected' : '' }}>Отправка</option>
-                            <option value="sender" {{ $routing->route_type == 'sender' ? 'selected' : '' }}>Перевозка</option>
+                            <option value="sender" {{ $routing->route_type == 'sender' ? 'selected' : '' }}>Отправляю</option>
+                            <option value="carrier" {{ $routing->route_type == 'carrier' ? 'selected' : '' }}>Перевожу</option>
                         </select>
                     </div>
 
