@@ -24,7 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/',[\App\Http\Controllers\Admin\HomeController::class,'index'])->name('home.index');
-    Route::get('/chart',[\App\Http\Controllers\Admin\HomeController::class,'routesChart'])->name('home.index');
+    Route::get('/chart',[\App\Http\Controllers\Admin\HomeController::class,'routesChart'])->name('home.index.chart');
 
 
     Route::group(['prefix'=>'routes',],function (){
