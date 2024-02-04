@@ -20,6 +20,7 @@
                             <th scope="col">Фамилия</th>
                             <th scope="col">Город</th>
                             <th scope="col">Телефон</th>
+                            <th scope="col">Дата создания</th>
                             <th scope="col">Фото</th>
                             <th scope="col">Действие</th>
                         </tr>
@@ -32,7 +33,9 @@
                                 <td data-th="Фамилия">{{$user->surname}}</td>
                                 <td data-th="Город">{{$user->city}}</td>
                                 <td data-th="Телефон">{{$user->phone_number}}</td>
-                                <td data-th="Фото"><img  style="width: 150px" src="{{getImage($user->main_image)}}" alt="avatar"></td>
+                                <td data-th="Дата создания">{{$user->created_at}}</td>
+                                <td data-th="Фото"><img  style="width: 130px" src="{{getImage($user->main_image)}}" alt="avatar"></td>
+
                                 <td data-th="Действие"> <a href="{{route('user.edit',$user->id)}}" class="btn btn-outline-success"> <i class="fa fa-edit"></i></a>
                                     <form action="{{route('user.delete',$user->id) }}" method="post">
                                         @csrf
