@@ -33,3 +33,7 @@ Route::group(['prefix'=>'personalRoutes',],function (){
     Route::post('/add',[\App\Http\Controllers\API\V1\PersonalRoutesController::class,'addRoute']);
 });
 
+Route::group(['prefix'=>'auth',],function (){
+    Route::post('/sendSMS',[\App\Http\Controllers\API\V1\AuthController::class,'sendSMS']);
+});
+
