@@ -30,6 +30,6 @@ class AuthService extends Controller
             'from' => 'PerevozkiOnline',
         ]);
         $this->storeVerificationData($code);
-        return $response->json();
+        return response()->json(['data'=>$response]);
     }
 }
