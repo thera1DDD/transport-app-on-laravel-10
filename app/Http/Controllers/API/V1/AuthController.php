@@ -32,11 +32,8 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * @throws Exception
-     */
-    public function sendSMS(SendSmsRequest $request): JsonResponse{
-       $data = $request->validated();
+    public function sendSMS(SendSmsRequest $request){
+        dd(1111111);
        return $this->authService->sendSMS($data,mt_rand(1000,9999));
     }
 

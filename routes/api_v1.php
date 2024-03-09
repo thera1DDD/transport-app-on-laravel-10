@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\V1\AuthController;
+use App\Http\Controllers\API\V1\MainDisplayController;
+use App\Http\Controllers\API\V1\PersonalRoutesController;
+use App\Http\Controllers\API\V1\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,22 +22,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['prefix'=>'mainDisplay'],function (){
-    Route::post('/sendOffer',[\App\Http\Controllers\API\V1\MainDisplayController::class,'sendOffer']);
-    Route::get('/getRoutes',[\App\Http\Controllers\API\V1\MainDisplayController::class,'getRoutes']);
-    Route::get('/filter',[\App\Http\Controllers\API\V1\MainDisplayController::class,'filterRoutes']);
+    Route::post('/sendOffer',[MainDisplayController::class,'sendOffer']);
+    Route::get('/getRoutes',[MainDisplayController::class,'getRoutes']);
+    Route::get('/filter',[MainDisplayController::class,'filterRoutes']);
 });
 Route::group(['prefix'=>'profile',],function (){
-    Route::get('/show',[\App\Http\Controllers\API\V1\ProfileController::class,'show']);
-    Route::put('/update',[\App\Http\Controllers\API\V1\ProfileController::class,'update']);
-    Route::post('/offer/reply',[\App\Http\Controllers\API\V1\ProfileController::class,'replyOffer']);
+    Route::get('/show',[ProfileController::class,'show']);
+    Route::put('/update',[ProfileController::class,'update']);
+    Route::post('/offer/reply',[ProfileController::class,'replyOffer']);
 });
 
 Route::group(['prefix'=>'personalRoutes',],function (){
-    Route::get('/getAllById/{users_id}',[\App\Http\Controllers\API\V1\PersonalRoutesController::class,'getMyRoutes']);
-    Route::post('/add',[\App\Http\Controllers\API\V1\PersonalRoutesController::class,'addRoute']);
+    Route::get('/getAllById/{users_id}',[PersonalRoutesController::class,'getMyRoutes']);
+    Route::post('/add',[PersonalRoutesController::class,'addRoute']);
 });
 
-Route::group(['prefix'=>'auth',],function (){
-    Route::post('/sendSMS',[\App\Http\Controllers\API\V1\AuthController::class,'sendSMS']);
+Route::group(['prefix'=>'reg',],function (){
+    Route::post('/sendSMS',[AuthController::class,'sendSMS']);
 });
 

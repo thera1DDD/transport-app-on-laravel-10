@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\API\Auth;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SendSmsRequest extends FormRequest
@@ -17,12 +18,12 @@ class SendSmsRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'phone_number' => ['required', 'regex:/^\+?[0-9]{1,}$/'],
+            'phone_number' => 'required|regex:/^\+?[0-9]+$/',
         ];
     }
 
@@ -30,6 +31,7 @@ class SendSmsRequest extends FormRequest
     {
         return [
             'phone_number.regex' => 'Некорректный формат номера телефона.',
+            'phone_number.required' => 'Номер телефона является обязательным полем',
         ];
     }
 }
