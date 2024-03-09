@@ -44,14 +44,6 @@ class AuthController extends Controller
     public function postUser(VerifySmsRequest $request): JsonResponse
     {
         $data = $request->validated();
-        return $this->authService->verifySMS($data);
+        return $this->authService->postUser($data);
     }
-
-    public function resendSMS(SendSmsRequest $request): JsonResponse
-    {
-        $this->authService->sendSMS($request->validated()['phone_number']);
-        return response()->json(['message' => 'New SMS sent successfully']);
-    }
-
-
 }

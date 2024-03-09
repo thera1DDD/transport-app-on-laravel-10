@@ -14,32 +14,39 @@ use Illuminate\Support\Facades\Http;
 class AuthService extends Controller
 {
 
-    protected function storeVerificationData($verificationCode,$phone_number): void
+    public function sendSMS($data, $code): JsonResponse
     {
-        session()->put('verification_code', [
-            'phone_number'=> $phone_number,
-            'code' => $verificationCode,
-            'created_at' => now(),
-        ]);
-    }
-    public function sendSMS($data,$code): JsonResponse
-    {
-        $this->storeVerificationData($code,$data['phone_number']);
-        $response = Http::post(env('SMS_API') .'/sms/send' , [
-            'user' => env('SMS_LOGIN'),
-            'pass' => env('SMS_PASSWORD'),
-            'to' => $data['phone_number'],
-            'txt' => 'Ваш код для авторизации: '.$code,
-            'from' => 'Perevozki',
-        ]);
-        return response()->json(
-            [
-                'green_sms_data'=>$response,'code'=>$code,'phone_number'=>$data['phone_number']
-            ]
-        );
+        try {
+            // Проверяем существование номера телефона в базе данных
+            $user = User::where('phone_number', $data['phone_number'])->first();
+
+            if (!$user) {
+                // Отправляем SMS через API
+                $response = Http::post(env('SMS_API') .'/sms/send', [
+                    'user' => env('SMS_LOGIN'),
+                    'pass' => env('SMS_PASSWORD'),
+                    'to' => $data['phone_number'],
+                    'txt' => 'Ваш код для авторизации: '.$code,
+                    'from' => 'Perevozki',
+                ]);
+
+                return response()->json([
+                    'success' => true,
+                    'data' => [
+                        'green_sms_data' => $response,
+                        'code' => $code,
+                        'phone_number' => $data['phone_number'],
+                    ],
+                ]);
+            } else {
+                return response()->json(['error' => 'Такой номер уже существует'], 422);
+            }
+        } catch (\Exception $exception) {
+            return response()->json(['error' => $exception], 500);
+        }
     }
 
-    public function verifySMS($data)
+    public function postUser($data): JsonResponse
     {
       $user = User::firstOrCreate
       (
