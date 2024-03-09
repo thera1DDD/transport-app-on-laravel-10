@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Auth\SendSmsRequest;
+use App\Http\Requests\API\Auth\VerifySmsRequest;
 use App\Http\Requests\API\Profile\ProfileRequest;
 use App\Http\Requests\API\Profile\ReplyOfferRequest;
+use App\Models\User;
 use App\Services\AuthService;
 use App\Services\ProfileService;
 use Exception;
@@ -13,6 +15,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -32,26 +35,46 @@ class AuthController extends Controller
         ]);
     }
 
-    public function sendSMS(SendSmsRequest $request){
-        dd(1111111);
-       return $this->authService->sendSMS($data,mt_rand(1000,9999));
-    }
-
-    public function verifySMS(SendSmsRequest $request): JsonResponse
+    public function sendSMS(SendSmsRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $verificationCode = session('verification_code.code');
+        return $this->authService->sendSMS($data,mt_rand(1000,9999));
+    }
 
-        if (!$verificationCode || $verificationCode !== $data['code']) {
+    public function verifySMS(VerifySmsRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+        $verificationData = session('verification_code');
+
+        if (
+            !$verificationData
+            || $verificationData['code'] !== $data['code']
+            || now()->gt(Carbon::parse($verificationData['created_at'])->addMinute())
+        ) {
             return response()->json(['message' => 'Invalid verification code'], 401);
         }
 
-        // Ваша логика успешной верификации, например, выдача токена
-        $token = Auth::login(Auth::user());
+        // Создание нового пользователя в базе данных
+        $user = User::create([
+            'phone_number' => $verificationData['phone_number'],
+            // Другие поля пользователя
+        ]);
+
+        // Генерация и присоединение токена к пользователю
+        $user->token = $user->createToken('API Token')->accessToken;
+
+        // Сохранение пользователя с токеном
+        $user->save();
+
+        // Опционально, вы можете добавить дополнительные данные в ответ
+        $response = [
+            'token' => $user->token,
+            'user' => $user,
+        ];
 
         session()->forget('verification_code');
 
-        return response()->json(['token' => $token]);
+        return response()->json($response);
     }
 
     public function resendSMS(SendSmsRequest $request): JsonResponse

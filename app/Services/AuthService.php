@@ -12,22 +12,23 @@ use Illuminate\Support\Facades\Http;
 class AuthService extends Controller
 {
 
-    protected function storeVerificationData($verificationCode): void
+    protected function storeVerificationData($verificationCode,$phone_number): void
     {
         session()->put('verification_code', [
+            'phone_number'=> $phone_number,
             'code' => $verificationCode,
             'created_at' => now(),
         ]);
     }
     public function sendSMS($data,$code): JsonResponse
     {
-        $this->storeVerificationData($code);
+        $this->storeVerificationData($code,$data['phone_number']);
         $response = Http::post(env('SMS_API') .'/sms/send' , [
             'user' => env('SMS_LOGIN'),
             'pass' => env('SMS_PASSWORD'),
             'to' => $data['phone_number'],
             'txt' => 'Ваш код для авторизации: '.$code,
-            'from' => 'PerevozkiOnline',
+            'from' => 'Perevozki',
         ]);
         return response()->json(['data'=>$response]);
     }

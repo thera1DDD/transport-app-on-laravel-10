@@ -39,5 +39,6 @@ Route::group(['prefix'=>'personalRoutes',],function (){
 
 Route::group(['prefix'=>'reg',],function (){
     Route::post('/sendSMS',[AuthController::class,'sendSMS']);
+    Route::post('/verifySMS',[AuthController::class,'verifySMS']);
 });
 
