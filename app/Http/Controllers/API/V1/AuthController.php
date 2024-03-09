@@ -41,41 +41,10 @@ class AuthController extends Controller
         return $this->authService->sendSMS($data,mt_rand(1000,9999));
     }
 
-    public function verifySMS(VerifySmsRequest $request): JsonResponse
+    public function postUser(VerifySmsRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $verificationData = session('verification_code');
-        dd($verificationData);
-        if (
-            !$verificationData
-            || $verificationData['code'] !== $data['code']
-            || now()->gt(Carbon::parse($verificationData['created_at'])->addMinute())
-        ) {
-            dd($verificationData);
-            return response()->json(['message' => 'Invalid verification code'], 401);
-        }
-
-        // Создание нового пользователя в базе данных
-        $user = User::create([
-            'phone_number' => $verificationData['phone_number'],
-            // Другие поля пользователя
-        ]);
-
-        // Генерация и присоединение токена к пользователю
-        $user->token = $user->createToken('API Token')->accessToken;
-
-        // Сохранение пользователя с токеном
-        $user->save();
-
-        // Опционально, вы можете добавить дополнительные данные в ответ
-        $response = [
-            'token' => $user->token,
-            'user' => $user,
-        ];
-
-        session()->forget('verification_code');
-
-        return response()->json($response);
+        return $this->authService->verifySMS($data);
     }
 
     public function resendSMS(SendSmsRequest $request): JsonResponse

@@ -25,7 +25,9 @@ class User extends Authenticatable
         'patronymic',
         'city',
         'main_image',
-        'phone_number'
+        'phone_number',
+        'token',
+
     ];
 
     /**

@@ -23,14 +23,17 @@ class VerifySmsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required',
+            'phone_number' => 'required|regex:/^\+?[0-9]+$/',
+            'token'=>'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'code.required' => 'Код является обязательным полем',
+            'phone_number.regex' => 'Некорректный формат номера телефона.',
+            'phone_number.required' => 'Номер телефона является обязательным полем',
+            'token.required' => 'Токен является обязательным полем',
         ];
     }
 }
