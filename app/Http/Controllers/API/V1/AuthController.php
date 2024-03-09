@@ -45,12 +45,13 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         $verificationData = session('verification_code');
-
+        dd($verificationData);
         if (
             !$verificationData
             || $verificationData['code'] !== $data['code']
             || now()->gt(Carbon::parse($verificationData['created_at'])->addMinute())
         ) {
+            dd($verificationData);
             return response()->json(['message' => 'Invalid verification code'], 401);
         }
 
