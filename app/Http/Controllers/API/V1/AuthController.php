@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\Auth\CheckTokenRequest;
 use App\Http\Requests\API\Auth\SendSmsRequest;
 use App\Http\Requests\API\Auth\VerifySmsRequest;
 use App\Http\Requests\API\Profile\ProfileRequest;
@@ -45,5 +46,16 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         return $this->authService->postUser($data);
+    }
+
+    public function checkToken(CheckTokenRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+        return $this->authService->checkToken($data);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+       return $this->authService->logout($request->users_id);
     }
 }

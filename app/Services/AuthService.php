@@ -17,10 +17,6 @@ class AuthService extends Controller
     public function sendSMS($data, $code): JsonResponse
     {
         try {
-            // Проверяем существование номера телефона в базе данных
-            $user = User::where('phone_number', $data['phone_number'])->first();
-
-            if (!$user) {
                 // Отправляем SMS через API
                 $response = Http::post(env('SMS_API') .'/sms/send', [
                     'user' => env('SMS_LOGIN'),
@@ -38,9 +34,7 @@ class AuthService extends Controller
                         'phone_number' => $data['phone_number'],
                     ],
                 ]);
-            } else {
-                return response()->json(['error' => 'Такой номер уже существует'], 422);
-            }
+
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception], 500);
         }
@@ -56,5 +50,21 @@ class AuthService extends Controller
           ]
       );
       return response()->json(['user_data'=> $user]);
+    }
+
+    public function checkToken($data): JsonResponse
+    {
+        $user = User::query()->where('id',$data['users_id'])->where('token',$data['token'])->exists();
+        return response()->json($user);
+    }
+
+    public function logout($users_id): JsonResponse
+    {
+        try {
+            User::query()->where('id', $users_id)->update(['token' => null]);
+            return response()->json(['success' => true, 'message' => 'Token cleared successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred'], 500);
+        }
     }
 }

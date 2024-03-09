@@ -40,5 +40,7 @@ Route::group(['prefix'=>'personalRoutes',],function (){
 Route::group(['prefix'=>'reg',],function (){
     Route::post('/sendSMS',[AuthController::class,'sendSMS']);
     Route::post('/postUser',[AuthController::class,'postUser']);
+    Route::post('/checkToken',[AuthController::class,'checkToken']);
+    Route::post('/logout',[AuthController::class,'logout']);
 });
 
