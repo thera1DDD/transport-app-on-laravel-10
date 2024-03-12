@@ -27,15 +27,6 @@ class AuthController extends Controller
     {
         $this->authService = $authService;
     }
-
-    protected function storeVerificationData($verificationCode): void
-    {
-        session()->put('verification_code', [
-            'code' => $verificationCode,
-            'created_at' => now(),
-        ]);
-    }
-
     public function sendSMS(SendSmsRequest $request): JsonResponse
     {
         $data = $request->validated();

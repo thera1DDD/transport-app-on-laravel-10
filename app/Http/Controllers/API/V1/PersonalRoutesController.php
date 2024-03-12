@@ -15,7 +15,8 @@ class PersonalRoutesController extends Controller
     }
 
     public function addRoute(StoreRequest $request): JsonResponse
-    {
-        return response()->json(['result' => Routing::create($request->validated())]);
+    {   $data =  $request->validated();
+        $route = Routing::create($data);
+        return response()->json(['result' => $route]);
     }
 }
