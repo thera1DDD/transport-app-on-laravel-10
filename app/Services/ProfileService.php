@@ -13,7 +13,7 @@ class ProfileService extends Controller
     public function show($request)
     {
         $user = User::query()
-            ->select('id','name','phone_number')
+            ->select('id','name','phone_number','email','city')
             ->where('id',$request->id)
             ->get();
         if(isset($user)) {
