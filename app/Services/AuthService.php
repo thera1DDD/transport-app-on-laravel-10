@@ -49,7 +49,7 @@ class AuthService extends Controller
               'token'=>$data['token']
           ]
       );
-      return response()->json(['user_data'=> $user]);
+      return response()->json(['user'=> $user]);
     }
 
     public function checkToken($data): JsonResponse

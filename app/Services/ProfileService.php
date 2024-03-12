@@ -17,7 +17,7 @@ class ProfileService extends Controller
             ->where('id',$request->id)
             ->get();
         if(isset($user)) {
-            return response()->json($user);
+            return response()->json(['user' => $user]);
         }
         else{
             return response('user not found',404);
