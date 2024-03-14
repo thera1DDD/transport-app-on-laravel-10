@@ -6,13 +6,36 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Auth\VerifySmsRequest;
 use App\Models\Offer;
 use App\Models\User;
+use http\Env\Request;
+use http\Env\Response;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
+use function Symfony\Component\String\u;
 
 
 class AuthService extends Controller
 {
+
+    public function verifyCode($data): Collection|JsonResponse|array
+    {
+        $user = User::query()->select('verification_code')->where('id',$data['users_id'])->get();
+        if($user){
+            if($user['verification_code'] == $data['verification_code']){
+                $token = Str::random(32);
+                $user->remember_token = $token;
+                $user->phone_verified_at = now();
+                $user->save();
+                return $user;
+            }
+            else{
+                return response()->json(['fail'=>'Неправильный код']);
+            }
+        }
+        return response()->json(['error'=>'user does not exist'],404);
+    }
 
     public function sendSMS($data, $code): JsonResponse
     {
@@ -25,13 +48,14 @@ class AuthService extends Controller
                     'txt' => 'Ваш код для авторизации: '.$code,
                     'from' => 'Perevozki',
                 ]);
-
+                // Добавление пользователя
+                $userData = $this->postUser($data['phone_number'],$code);
                 return response()->json([
                     'success' => true,
                     'data' => [
                         'green_sms_data' => $response,
                         'code' => $code,
-                        'phone_number' => $data['phone_number'],
+                        'user' => $userData,
                     ],
                 ]);
 
@@ -40,16 +64,15 @@ class AuthService extends Controller
         }
     }
 
-    public function postUser($data): JsonResponse
+    public function postUser($phone, $code)
     {
-      $user = User::firstOrCreate
-      (
-          [
-              'phone_number'=>$data['phone_number'],
-              'token'=>$data['token']
-          ]
-      );
-      return response()->json(['user'=> $user]);
+        return User::firstOrCreate
+        (
+            [
+                'phone_number'=>$phone,
+                'verification_code'=>$code
+            ]
+        );
     }
 
     public function checkToken($data): JsonResponse

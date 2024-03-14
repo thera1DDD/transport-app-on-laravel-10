@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Services\AuthService;
 use App\Services\ProfileService;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,17 +28,23 @@ class AuthController extends Controller
     {
         $this->authService = $authService;
     }
+
+    public function verifyCode(VerifySmsRequest $request): Collection|JsonResponse|array
+    {
+        $data = $request->validated();
+        return $this->authService->verifyCode($data);
+    }
     public function sendSMS(SendSmsRequest $request): JsonResponse
     {
         $data = $request->validated();
         return $this->authService->sendSMS($data,mt_rand(1000,9999));
     }
 
-    public function postUser(VerifySmsRequest $request): JsonResponse
-    {
-        $data = $request->validated();
-        return $this->authService->postUser($data);
-    }
+//    public function postUser(VerifySmsRequest $request): JsonResponse
+//    {
+//        $data = $request->validated();
+//        return $this->authService->postUser($data);
+//    }
 
     public function checkToken(CheckTokenRequest $request): JsonResponse
     {

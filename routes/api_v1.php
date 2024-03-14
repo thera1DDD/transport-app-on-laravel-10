@@ -38,8 +38,8 @@ Route::group(['prefix'=>'personalRoutes',],function (){
 });
 
 Route::group(['prefix'=>'reg',],function (){
-    Route::post('/sendSMS',[AuthController::class,'sendSMS']);
-    Route::post('/postUser',[AuthController::class,'postUser']);
+    Route::post('/sendCode',[AuthController::class,'sendSMS']);
+    Route::post('/verifyCode',[AuthController::class,'verifyCode']);
     Route::post('/checkToken',[AuthController::class,'checkToken']);
     Route::post('/logout',[AuthController::class,'logout']);
 });
