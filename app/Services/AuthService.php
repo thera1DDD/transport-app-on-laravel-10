@@ -19,11 +19,11 @@ use function Symfony\Component\String\u;
 class AuthService extends Controller
 {
 
-    public function verifyCode($data): Collection|JsonResponse|array
+    public function verifyCode($data)
     {
         $user = User::query()->select('verification_code')->where('id',$data['users_id'])->get();
         if($user){
-            if($user['verification_code'] == $data['verification_code']){
+            if($user->verification_code == $data['verification_code']){
                 $token = Str::random(32);
                 $user->remember_token = $token;
                 $user->phone_verified_at = now();
