@@ -24,7 +24,7 @@ class AuthService extends Controller
         $user = User::where('id',$data['users_id'])->first();
         if($user){
             if($user->verification_code == $data['verification_code']){
-                $token = Str::random(32);
+                $token = Str::random(60);
                 $user->remember_token = $token;
                 $user->phone_verified_at = now();
                 $user->save();
