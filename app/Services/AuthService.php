@@ -40,14 +40,14 @@ class AuthService extends Controller
     public function sendSMS($data, $code): JsonResponse
     {
         try {
-//                // Отправляем SMS через API
-//                $response = Http::post(env('SMS_API') .'/sms/send', [
-//                    'user' => env('SMS_LOGIN'),
-//                    'pass' => env('SMS_PASSWORD'),
-//                    'to' => $data['phone_number'],
-//                    'txt' => 'Ваш код для авторизации: '.$code,
-//                    'from' => 'Perevozki',
-//                ]);
+                // Отправляем SMS через API
+                $response = Http::post(env('SMS_API') .'/sms/send', [
+                    'user' => env('SMS_LOGIN'),
+                    'pass' => env('SMS_PASSWORD'),
+                    'to' => $data['phone_number'],
+                    'txt' => 'Ваш код для авторизации: '.$code,
+                    'from' => 'Perevozki',
+                ]);
                 // Добавление пользователя
                 $userData = $this->postUser($data['phone_number'],$code);
                 return response()->json([
