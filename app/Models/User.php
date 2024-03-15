@@ -26,7 +26,9 @@ class User extends Authenticatable
         'city',
         'main_image',
         'phone_number',
-        'token',
+        'verification_code',
+        'remember_token',
+        'phone_verified_at'
 
     ];
 

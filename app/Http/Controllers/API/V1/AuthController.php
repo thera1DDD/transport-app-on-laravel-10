@@ -29,7 +29,7 @@ class AuthController extends Controller
         $this->authService = $authService;
     }
 
-    public function verifyCode(VerifySmsRequest $request): Collection|JsonResponse|array
+    public function verifyCode(VerifySmsRequest $request)
     {
         $data = $request->validated();
         return $this->authService->verifyCode($data);
