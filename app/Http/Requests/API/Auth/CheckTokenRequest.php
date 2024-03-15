@@ -24,7 +24,7 @@ class CheckTokenRequest extends FormRequest
     {
         return [
             'users_id' => 'required|integer',
-            'token'=>'required',
+            'remember_token'=>'required',
         ];
     }
 
@@ -32,7 +32,7 @@ class CheckTokenRequest extends FormRequest
     {
         return [
             'users_id.required' => 'users_id является обязательным полем',
-            'token.required' => 'token является обязательным полем',
+            'remember_token.required' => 'remember_token является обязательным полем',
         ];
     }
 }
