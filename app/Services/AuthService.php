@@ -53,7 +53,7 @@ class AuthService extends Controller
                 return response()->json([
                     'success' => true,
                     'data' => [
-//                        'green_sms_data' => $response,
+                        'green_sms_data' => $response,
                         'code' => $code,
                         'user' => $userData,
                     ],
