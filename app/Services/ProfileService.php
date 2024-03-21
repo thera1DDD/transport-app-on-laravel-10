@@ -14,7 +14,7 @@ class ProfileService extends Controller
     {
         $user = User::query()
             ->where('id',$request->id)
-            ->get();
+            ->first();
         if(isset($user)) {
             return response()->json(['user' => $user]);
         }
