@@ -30,7 +30,7 @@ class ProfileService extends Controller
             if ($user) {
                 if (isset($data['email'])) {
                     $existingUser = User::where('email', $data['email'])->where('id', '!=', $data['users_id'])->first();
-                    $existingNumber = User::where('phone_number',$data['phone_number'])->where('id','!=',$data['phone_number'])->first();
+                    $existingNumber = User::where('phone_number',$data['phone_number'])->where('id','!=',$data['users_id'])->first();
                     if (isset($existingUser) or isset($existingNumber)) {
                         return response()->json(['success' => false, 'message' => 'Электронная почта или номер уже существуют'], 422);
                     }
