@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="flex items-center justify-center mb-4">
-        <b style="color: ghostwhite" class="text-2xl font-bold">DjigitAdmin</b>
+        <b style="color: dimgray" class="text-2xl font-bold">DjigitAdmin</b>
     </div>
     <form method="POST" action="{{ route('register') }}">
         @csrf

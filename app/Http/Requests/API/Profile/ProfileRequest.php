@@ -22,8 +22,8 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'users_id' => 'required|integer',
-            'phone_number' => 'nullable|string|max:255',
+            'users_id' => 'nullable',
+            'phone_number' => 'nullable',
             'email' => 'nullable|email|unique:users,email,' . auth()->id(),
             'name' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
@@ -32,7 +32,7 @@ class ProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'phone_number.string' => 'Поле "phone_number" должно быть строкой.',
+            'phone_number.string' => 'Поле\ "phone_number" должно быть строкой.',
             'phone_number.max' => 'Поле "phone_number" не должно превышать 255 символов.',
             'email.email' => 'Поле "email" должно быть действительным email адресом.',
             'email.unique' => 'Данный email адрес уже используется другим пользователем.',
