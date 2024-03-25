@@ -24,7 +24,7 @@ class ProfileRequest extends FormRequest
         return [
             'users_id' => 'nullable',
             'phone_number' => 'nullable',
-            'email' => 'nullable|email|unique:users,email,' . auth()->id(),
+            'email' => 'nullable',
             'name' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
         ];
