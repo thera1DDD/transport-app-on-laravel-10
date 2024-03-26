@@ -41,19 +41,19 @@ class AuthService extends Controller
     {
         try {
 //                // Отправляем SMS через API
-//                $response = Http::post(env('SMS_API') .'/sms/send', [
-//                    'user' => env('SMS_LOGIN'),
-//                    'pass' => env('SMS_PASSWORD'),
-//                    'to' => $data['phone_number'],
-//                    'txt' => 'Ваш код для авторизации: '.$code,
-//                    'from' => 'Perevozki',
-//                ]);
+                $response = Http::post(env('SMS_API') .'/sms/send', [
+                    'user' => env('SMS_LOGIN'),
+                    'pass' => env('SMS_PASSWORD'),
+                    'to' => $data['phone_number'],
+                    'txt' => 'Ваш код для авторизации: '.$code,
+                    'from' => 'Perevozki',
+                ]);
                 // Добавление пользователя
                 $userData = $this->postUser($data['phone_number'],$code);
                 return response()->json([
                     'success' => true,
                     'data' => [
-//                        'green_sms_data' => $response,
+                        'green_sms_data' => $response,
                         'code' => $code,
                         'user' => $userData,
                     ],
