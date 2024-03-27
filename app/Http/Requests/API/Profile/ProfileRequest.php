@@ -22,24 +22,11 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'users_id' => 'nullable',
+            'users_id' => 'nullable|integer',
             'phone_number' => 'nullable',
             'email' => 'nullable',
             'name' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
-        ];
-    }
-    public function messages(): array
-    {
-        return [
-            'phone_number.string' => 'Поле\ "phone_number" должно быть строкой.',
-            'phone_number.max' => 'Поле "phone_number" не должно превышать 255 символов.',
-            'email.email' => 'Поле "email" должно быть действительным email адресом.',
-            'email.unique' => 'Данный email адрес уже используется другим пользователем.',
-            'name.string' => 'Поле "name" должно быть строкой.',
-            'name.max' => 'Поле "name" не должно превышать 255 символов.',
-            'city.string' => 'Поле "city" должно быть строкой.',
-            'city.max' => 'Поле "city" не должно превышать 255 символов.',
         ];
     }
 }
