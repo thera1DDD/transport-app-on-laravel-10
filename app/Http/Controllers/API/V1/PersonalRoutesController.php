@@ -12,7 +12,7 @@ class PersonalRoutesController extends Controller
 {
     public function getMyRoutes(int $users_id)
     {
-        return Routing::where('owners_id',$users_id)->paginate(4);
+        return Routing::with('user')->where('owners_id',$users_id)->paginate(4);
     }
 
     public function addRoute(StoreRequest $request): JsonResponse
