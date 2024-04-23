@@ -35,6 +35,7 @@ Route::group(['prefix'=>'profile',],function (){
 Route::group(['prefix'=>'personalRoutes',],function (){
     Route::get('/getAllById/{users_id}',[PersonalRoutesController::class,'getMyRoutes']);
     Route::post('/add',[PersonalRoutesController::class,'addRoute']);
+    Route::put('/update',[PersonalRoutesController::class,'updateRoute']);
 });
 
 Route::group(['prefix'=>'reg',],function (){
