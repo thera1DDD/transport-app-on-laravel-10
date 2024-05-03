@@ -21,20 +21,20 @@ class AuthService extends Controller
 
     public function verifyCode($data)
     {
-        $user = User::where('id',$data['users_id'])->first();
+        $user = User::where('phone_number',$data['phone_number'])->first();
         if($user){
             if($user->verification_code == $data['verification_code']){
                 $token = Str::random(60);
                 $user->remember_token = $token;
                 $user->phone_verified_at = now();
                 $user->save();
-                return response()->json(['user'=>$user,'token'=>$token]);
+                return response()->json(['id'=>$user->id,'token'=>$token]);
             }
             else{
-                return response()->json(['fail'=>'Неправильный код']);
+                return response()->json(['message'=>'Неправильный код' ,'status'=>false],401);
             }
         }
-        return response()->json(['error'=>'user does not exist'],404);
+        return response()->json(['message'=>'Такого пользователя не существует','status' => false],404);
     }
 
     public function sendSMS($data, $code): JsonResponse
