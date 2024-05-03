@@ -24,7 +24,7 @@ class VerifySmsRequest extends FormRequest
     {
         return [
             'verification_code' => 'nullable',
-            'users_id'=>'nullable',
+            'phone_number'=>'nullable',
         ];
     }
 }
