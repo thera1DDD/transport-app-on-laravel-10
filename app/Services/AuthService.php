@@ -48,7 +48,7 @@ class AuthService extends Controller
                     'pass' => env('SMS_PASSWORD'),
                     'to' => $data['phone_number'],
                     'txt' => 'Ваш код для авторизации: '.$code,
-                    'from' => 'Bariatrics',
+                    'from' => 'Perevozki',
                 ]);
                 // Добавление пользователя
                 $userData = $this->postUser($data['phone_number'],$code);
