@@ -23,7 +23,10 @@ class PersonalRoutesController extends Controller
     }
     public function getMyRoutes(int $users_id): Collection|array
     {
-        return Routing::with('user')->where('owners_id',$users_id)->get();
+        return Routing::with('user')
+            ->where('owners_id', $users_id)
+            ->whereDate('end_time', '>', now()) // Добавляем условие, что end_time должна быть больше текущей даты
+            ->get();
     }
 
     public function addRoute(StoreRequest $request): JsonResponse
