@@ -21,6 +21,6 @@ class Routing extends Model
     {
         return $this->select('id', 'name', 'description', 'price', 'status', 'from_place', 'to_place', 'start_time', 'end_time','route_type', 'load_type', 'load_size', 'owners_id', 'created_at')
             ->where('route_type', $routeType)
-            ->where('end_time', '>', now()); // Добавляем условие, что end_time должна быть больше текущей даты и времени
+            ->whereDate('end_time', '>', now()); // Добавляем условие, что end_time должна быть больше текущей даты и времени
     }
 }
