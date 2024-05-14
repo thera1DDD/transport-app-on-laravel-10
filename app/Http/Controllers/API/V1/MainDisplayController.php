@@ -28,7 +28,9 @@ class MainDisplayController extends Controller
         $data = $request->validated();
         return $this->routingService->filter($data);
     }
-    public function sendOffer(SendOfferRequest $request): JsonResponse {
+    public function sendOffer(SendOfferRequest $request): JsonResponse
+    {
+        //check commit
         $data = $request->validated();
         return $this->routingService->sendOfferToRoute($data);
     }
