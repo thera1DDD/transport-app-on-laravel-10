@@ -16,7 +16,7 @@ class MainDisplayController extends Controller
 
     public function __construct(RoutingService $routingService)
     {
-        $this->routingService = $routingService;//check commit
+        $this->routingService = $routingService;
     }
     public function getRoutes(): JsonResponse {
         $carrierRoutes = (new Routing)->filterByRouteType('carrier')->with('user')->get();
