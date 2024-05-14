@@ -10,6 +10,7 @@ use App\Models\Routing;
 use App\Services\RoutingService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PersonalRoutesController extends Controller
 {
@@ -36,5 +37,10 @@ class PersonalRoutesController extends Controller
         $currentRoute = Routing::findOrFail($request->id);
         $this->routingService->update($request->validated(),$currentRoute);
         return response()->json($currentRoute);
+    }
+
+    public function deleteRoute(Request $request): JsonResponse {
+        Routing::find($request->id)->first()->forceDelete();
+        return response()->json(['status'=>true,'Успешно удаленно']);
     }
 }
