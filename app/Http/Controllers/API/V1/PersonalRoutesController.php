@@ -40,7 +40,6 @@ class PersonalRoutesController extends Controller
     }
 
     public function deleteRoute(Request $request): JsonResponse {
-        Routing::find($request->id)->first()->forceDelete();
-        return response()->json(['status'=>true,'Успешно удаленно']);
-    }
+        $currentRoute = Routing::find($request->id); if (!$currentRoute) { return response()->json(['error' => 'Маршрут не найден'], 404); }
+        $currentRoute->forceDelete(); return response()->json(['status' => true, 'Успешно удаленно']); }
 }
