@@ -49,7 +49,7 @@
                                 <td data-th="Тип груза">{{$route->load_type}}</td>
                                 <td data-th="Ширина груза">{{$route->load_width}}</td>
                                 <td data-th="Высота груза">{{$route->load_height}}</td>
-                                <td data-th="Длинна груза">{{$route->load_lenght}}</td>
+                                <td data-th="Длинна груза">{{$route->load_length}}</td>
                                 <td data-th="Размер груза">{{$route->load_size}}</td>
                                 <td data-th="От кого">
                                     {{ $route->user->name ?? 'Удаленный пользователь' }}
