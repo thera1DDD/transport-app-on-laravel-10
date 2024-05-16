@@ -23,7 +23,7 @@ class RoutingService extends Controller
     public function filter($data): JsonResponse {
 
         $query = Routing::with('user')->where('route_type', $data['route_type'])
-            ->whereDate('end_time', '>', now()); // Добавляем условие, что end_time должна быть больше текущей даты и времени;
+            ->where('end_time', '>', now()->toDateTimeString()); // Добавляем условие, что end_time должна быть больше текущей даты и времени;
         if (isset($data['start_time']) && $data['start_time'] !== '') {
             $query->where(function ($q) use ($data) {
                 $q->whereDate('start_time', $data['start_time'])

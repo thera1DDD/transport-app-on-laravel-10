@@ -25,7 +25,7 @@ class PersonalRoutesController extends Controller
     {
         return Routing::with('user')
             ->where('owners_id', $users_id)
-            ->whereDate('end_time', '>', now()) // Добавляем условие, что end_time должна быть больше текущей даты
+            ->where('end_time', '>', now()->toDateTimeString())
             ->get();
     }
 
