@@ -30,6 +30,5 @@ class Routing extends Model
         return $this->select('id', 'name', 'description', 'price', 'status', 'from_place', 'to_place', 'start_time', 'end_time','route_type', 'load_type', 'load_size', 'owners_id', 'created_at','load_width','load_length','load_height')
             ->where('route_type', $routeType)
             ->where('end_time', '>', now()->toDateTimeString())
-            ->get(); // Сравниваем end_time с текущим временем в строковом формате
     }
 }
