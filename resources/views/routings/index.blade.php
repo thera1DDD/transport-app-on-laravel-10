@@ -26,7 +26,9 @@
                             <th scope="col">Начало</th>
                             <th scope="col">Конец</th>
                             <th scope="col">Тип груза</th>
-                            <th scope="col">Размер груза</th>
+                            <th scope="col">Ширина груза</th>
+                            <th scope="col">Высота груза</th>
+                            <th scope="col">Длинна груза</th>
                             <th scope="col">От кого</th>
                             <th scope="col">Статус</th>
                             <th scope="col">Действие</th>
@@ -45,6 +47,9 @@
                                 <td data-th="Начало">{{$route->start_time}}</td>
                                 <td data-th="Конец">{{$route->end_time}}</td>
                                 <td data-th="Тип груза">{{$route->load_type}}</td>
+                                <td data-th="Ширина груза">{{$route->load_width}}</td>
+                                <td data-th="Высота груза">{{$route->load_height}}</td>
+                                <td data-th="Длинна груза">{{$route->load_lenght}}</td>
                                 <td data-th="Размер груза">{{$route->load_size}}</td>
                                 <td data-th="От кого">
                                     {{ $route->user->name ?? 'Удаленный пользователь' }}

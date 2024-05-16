@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('routings', function (Blueprint $table) {
-            $table->dropColumn(['load_width', 'load_length', 'load_height', 'city']);
+            $table->dropColumn(['load_width', 'load_length', 'load_height']);
         });
     }
 };

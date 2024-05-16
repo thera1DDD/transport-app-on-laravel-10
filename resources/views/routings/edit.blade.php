@@ -59,7 +59,18 @@
                         <label for="load_type">Тип груза:</label>
                         <input type="text" name="load_type" id="load_type" class="form-control custom-input" value="{{ $routing->load_type }}" required>
                     </div>
-
+                    <div class="form-group">
+                        <label for="load_height">Высота груза:</label>
+                        <input type="text" name="load_height" id="load_height" class="form-control custom-input" value="{{ $routing->load_height }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="load_width">Ширина груза</label>
+                        <input type="text" name="load_width" id="load_width" class="form-control custom-input" value="{{ $routing->load_width }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="load_length">Длина груза</label>
+                        <input type="text" name="load_length" id="load_length" class="form-control custom-input" value="{{ $routing->load_length }}" required>
+                    </div>
                     <div class="form-group">
                         <label for="load_size">Размер груза:</label>
                         <input type="text" name="load_size" id="load_size" class="form-control custom-input" value="{{ $routing->load_size }}" required>

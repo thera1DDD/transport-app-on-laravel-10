@@ -24,6 +24,9 @@ class UpdateRequest extends FormRequest
         return [
             'route_type' => 'nullable|in:carrier,sender',
             'name' => 'nullable|string|max:255',
+            'load_width' => 'nullable',
+            'load_length' => 'nullable',
+            'load_height' => 'nullable',
             'description' => 'nullable|string',
             'price' => 'nullable|numeric',
             'from_place' => 'nullable|string|max:255',
