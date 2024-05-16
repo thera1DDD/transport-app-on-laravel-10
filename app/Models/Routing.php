@@ -11,6 +11,13 @@ class Routing extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $casts =
+        [
+            'load_width'=>'integer',
+            'load_length'=>'integer',
+            'load_height' =>'integer'
+        ];
+
     protected $fillable = ['name','description','route_type','from_place','to_place','load_type','load_size','status','price','start_time','end_time','owners_id','load_width','load_length','load_height'];
 
     public function user(): BelongsTo
